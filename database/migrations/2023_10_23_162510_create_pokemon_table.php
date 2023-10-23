@@ -19,7 +19,7 @@ return new class extends Migration
 			$table->int("attack");
 			$table->int("defence");
 			$table->int("sp_attack");
-			$table->int("sp_defence");
+			$table->int("sp_defense");
 			$table->int("speed");
 			$table->foreign('type_id')->references('id')->on('type');
 			$table->foreign('type_secondary_id')->references('id')->on('type');
