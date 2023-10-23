@@ -17,7 +17,7 @@ return new class extends Migration
 			$table->string("image_url");
 			$table->int("hp");
 			$table->int("attack");
-			$table->int("defence");
+			$table->int("defense");
 			$table->int("sp_attack");
 			$table->int("sp_defense");
 			$table->int("speed");
