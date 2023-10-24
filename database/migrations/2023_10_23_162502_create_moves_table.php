@@ -16,8 +16,7 @@ return new class extends Migration
 			$table->string('name');
 
 			$table->foreignId('type_id')->references('id')->on('types');
-			
-			// $table->foreignId('type_id')->references('id')->on('type');
+
 			$table->string('power');
 			$table->string('description');
             $table->timestamps();

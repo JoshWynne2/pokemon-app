@@ -14,10 +14,11 @@ class pokemon_seeder extends Seeder
      */
     public function run(): void
     {
-
+		// opening the csv file
 		$csvFile = fopen(base_path("database/csvdata/pokemon.csv"), "r");
 
 		$firstline = true;
+		// going through each line of the csv to extract data
         while (($data = fgetcsv($csvFile, 200000, ",")) !== FALSE) {
             if (!$firstline) {
 
@@ -26,7 +27,7 @@ class pokemon_seeder extends Seeder
 
                 Pokemon::create([
                     "name" => $data['2'],
-                    "image_url" => '#',
+                    "image_url" => '#', // make this work!!
 					"hp" => $data['9'],
 					"attack" => $data['10'],
 					"defense" => $data['11'],

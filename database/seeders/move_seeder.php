@@ -21,6 +21,7 @@ class move_seeder extends Seeder
         while (($data = fgetcsv($csvFile, 200000, ",")) !== FALSE) {
             if (!$firstline) {
 
+				// foreign key!!!
 				$type = Type::where('name', $data['3'])->first();
 
                 Move::create([

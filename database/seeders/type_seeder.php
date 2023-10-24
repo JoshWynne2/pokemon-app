@@ -13,6 +13,7 @@ class type_seeder extends Seeder
      */
     public function run(): void
     {
+		// i made this csv myself, its a list of every type and a colour to go with it
         $csvFile = fopen(base_path("database/csvdata/type.csv"), "r");
 
 		$firstline = true;

@@ -23,10 +23,10 @@ return new class extends Migration
 			$table->integer("speed");
             $table->timestamps();
 
-			$table->string('type_id');
-			$table->string('type_secondary_id');
-			// $table->foreignId('type_id')->references('id')->on('type');
-			// $table->foreignId('type_secondary_id')->references('id')->on('type');
+			// $table->string('type_id');
+			// $table->string('type_secondary_id');
+			$table->foreignId('type_id')->references('id')->on('types');
+			$table->foreignId('type_secondary_id')->references('id')->on('types');
         });
     }
 
