@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('moves', function (Blueprint $table) {
             $table->id();
 			$table->string('name');
-			$table->string('type_id');
+
+			$table->foreignId('type_id')->references('id')->on('types');
+			
 			// $table->foreignId('type_id')->references('id')->on('type');
 			$table->string('power');
 			$table->string('description');

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('custom_pokemon_move', function (Blueprint $table) {
             $table->id();			
-			$table->foreignId('pokemon_id')->references('id')->on('Pokemon');
-			$table->foreignId('type_id')->references('id')->on('type');
+			$table->foreignId('pokemon_id')->references('id')->on('pokemon');
+			$table->foreignId('type_id')->references('id')->on('types');
         });
     }
 

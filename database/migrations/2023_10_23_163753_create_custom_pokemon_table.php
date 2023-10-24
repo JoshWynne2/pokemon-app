@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('custom_pokemon', function (Blueprint $table) {
             $table->id();
 			$table->foreignId('user_id')->references('id')->on('users');
-			$table->foreignId('pokemon_id')->references('id')->on('Pokemon');
+			$table->foreignId('pokemon_id')->references('id')->on('pokemon');
 			$table->string('nickname');
         });
     }

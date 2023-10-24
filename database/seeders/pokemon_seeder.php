@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Pokemon;
+use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,10 @@ class pokemon_seeder extends Seeder
 		$firstline = true;
         while (($data = fgetcsv($csvFile, 200000, ",")) !== FALSE) {
             if (!$firstline) {
+
+				$type1 = Type::where('name', $data['4'])->first();
+				$type2 = Type::where('name', $data['5'])->first();
+
                 Pokemon::create([
                     "name" => $data['2'],
                     "image_url" => '#',
@@ -28,8 +33,8 @@ class pokemon_seeder extends Seeder
 					"sp_attack" => $data['12'],
 					"sp_defense" => $data['13'],
 					"speed" => $data['14'],
-					"type_id" => $data['4'],
-					"type_secondary_id" => $data['5'] 
+					"type_id" => $type1->id,
+					"type_secondary_id" => $type2->id // make null correction a thing :3
                 ]);    
             }
             $firstline = false;
