@@ -29,8 +29,8 @@ class pokemon_seeder extends Seeder
 					"sp_attack" => $data['12'],
 					"sp_defense" => $data['13'],
 					"speed" => $data['14'],
-					"type_id" => 4,
-					"type_secondary_id" => 5 
+					"type_id" => $data['4'],
+					"type_secondary_id" => $data['5'] 
 					// PLEASE FIX THIS? I NEED TO QUEREY TYPES BY NAME FROM THE CSV
                 ]);    
             }

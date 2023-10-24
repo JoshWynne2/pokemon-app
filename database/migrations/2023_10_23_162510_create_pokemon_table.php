@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
 			$table->string("name");
 			$table->string("image_url");
-			$table->int("hp");
-			$table->int("attack");
-			$table->int("defense");
-			$table->int("sp_attack");
-			$table->int("sp_defense");
-			$table->int("speed");
+			$table->integer("hp");
+			$table->integer("attack");
+			$table->integer("defense");
+			$table->integer("sp_attack");
+			$table->integer("sp_defense");
+			$table->integer("speed");
 			$table->foreign('type_id')->references('id')->on('type');
 			$table->foreign('type_secondary_id')->references('id')->on('type');
         });
