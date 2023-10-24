@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\move_seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\pokemon_seeder;
 
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 		$this->call(UserSeeder::class);
 		$this->call(pokemon_seeder::class);
+		$this->call(move_seeder::class);
     }
 }

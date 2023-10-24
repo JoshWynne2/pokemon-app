@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('custom_pokemon', function (Blueprint $table) {
             $table->id();
-			$table->foreign('user_id')->references('id')->on('users');
-			$table->foreign('pokemon_id')->references('id')->on('pokemon');
+			$table->foreignId('user_id')->references('id')->on('users');
+			$table->foreignId('pokemon_id')->references('id')->on('Pokemon');
 			$table->string('nickname');
         });
     }

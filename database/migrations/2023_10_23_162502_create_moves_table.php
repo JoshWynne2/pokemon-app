@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('move', function (Blueprint $table) {
+        Schema::create('moves', function (Blueprint $table) {
             $table->id();
 			$table->string('name');
-			$table->foreign('type_id')->references('id')->on('type');
-			$table->integer('power');
+			$table->string('type_id');
+			// $table->foreignId('type_id')->references('id')->on('type');
+			$table->string('power');
 			$table->string('description');
+            $table->timestamps();
         });
     }
 

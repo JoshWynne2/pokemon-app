@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\pokemon;
+use App\Models\Pokemon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,14 +13,13 @@ class pokemon_seeder extends Seeder
      */
     public function run(): void
     {
-		pokemon::truncate();
 
 		$csvFile = fopen(base_path("database/csvdata/pokemon.csv"), "r");
 
 		$firstline = true;
         while (($data = fgetcsv($csvFile, 200000, ",")) !== FALSE) {
             if (!$firstline) {
-                pokemon::create([
+                Pokemon::create([
                     "name" => $data['2'],
                     "image_url" => '#',
 					"hp" => $data['9'],
@@ -31,7 +30,6 @@ class pokemon_seeder extends Seeder
 					"speed" => $data['14'],
 					"type_id" => $data['4'],
 					"type_secondary_id" => $data['5'] 
-					// PLEASE FIX THIS? I NEED TO QUEREY TYPES BY NAME FROM THE CSV
                 ]);    
             }
             $firstline = false;
