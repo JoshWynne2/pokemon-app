@@ -35,7 +35,7 @@ class pokemon_seeder extends Seeder
 					"sp_defense" => $data['13'],
 					"speed" => $data['14'],
 					"type_id" => $type1->id,
-					"type_secondary_id" => $type2->id // make null correction a thing :3
+					"type_secondary_id" => ($type2 != null ? $type2->id : 1) // make null correction a thing :3
                 ]);    
             }
             $firstline = false;

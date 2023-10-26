@@ -26,7 +26,7 @@ return new class extends Migration
 			// $table->string('type_id');
 			// $table->string('type_secondary_id');
 			$table->foreignId('type_id')->references('id')->on('types');
-			$table->foreignId('type_secondary_id')->references('id')->on('types');
+			$table->foreignId('type_secondary_id')->references('id')->on('types')->nullable();
         });
     }
 
