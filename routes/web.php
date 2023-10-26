@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CustomPokemonController;
+use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +32,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('/pokemon', PokemonController::class);
+Route::resource('/moves', MoveController::class);
+Route::resource('/custom', CustomPokemonController::class);
 
 require __DIR__.'/auth.php';
