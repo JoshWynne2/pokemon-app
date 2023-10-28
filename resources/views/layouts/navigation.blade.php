@@ -28,7 +28,7 @@
                 </div>
 				<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('custom.index')" :active="request()->routeIs('custom.index')">
-                        {{ __('Custom') }}
+                        {{ __('Your Pokemon') }}
                     </x-nav-link>
                 </div>
             </div>
