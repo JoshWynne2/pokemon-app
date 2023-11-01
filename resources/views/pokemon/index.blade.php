@@ -12,6 +12,7 @@
 					<table class="w-full">
 						<thead class="bg-slate-600"> 
 							<tr>
+							<th class="px-4 py-2"></th>
 							<th class="px-4 py-2">Name</th>
 							<th class="px-4 py-2">Type</th>
 							<th class="px-4 py-2">Secondary Type</th>
@@ -25,7 +26,8 @@
 					@else
 						<tr class ="bg-slate-800 hover:bg-slate-700">
 					@endif 
-							<td class="px-3 w-2/4"> {{$mon->name}}</td>
+							<td class="px-3 w-1/6"> <image src="{{URL($mon->image_url)}}"></td>
+							<td class="px-3 w-1/4"> {{$mon->name}}</td>
 							<td class="px-3 w-1/4"> {{$mon->type}}</td>
 							<td class="px-3 w-1/4"> {{$mon->secondary_type}}</td>
 							<!-- <td class="px-3 w-2/6"> {{$mon->name}}</td> -->

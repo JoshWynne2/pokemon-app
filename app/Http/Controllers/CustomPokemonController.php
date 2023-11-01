@@ -29,7 +29,13 @@ class CustomPokemonController extends Controller
      */
     public function create()
     {
-        return view('custom.create');
+		$allpokemon = DB::table('pokemon as p')
+						->select('p.name', "t.name as type", "t2.name as secondary_type", "p.image_url")
+						->join('types as t', 'p.type_id', '=', 't.id')
+						->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
+						->get();
+
+        return view('custom.create', ['pokemon' => $allpokemon]);
     }
 
     /**
@@ -55,6 +61,14 @@ class CustomPokemonController extends Controller
     {
 		$mon = CustomPokemon::findOrFail($id);
 
+		$mon = DB::table('custom_pokemon as c')
+								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type')
+								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
+								->join('types as t', 'p.type_id', '=', 't.id')
+								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
+								->where('c.id', '=', $id)
+								->first();
+        
 		return view('custom.edit', [
 			'mon' => $mon
 		]);

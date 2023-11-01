@@ -17,7 +17,7 @@ class PokemonController extends Controller
 		// $allpokemon = DB::table('pokemon')->where('type_id', '2')->get();
 
 		$allpokemon = DB::table('pokemon as p')
-						->select('p.name', "t.name as type", "t2.name as secondary_type")
+						->select('p.name', "t.name as type", "t2.name as secondary_type", "p.image_url")
 						->join('types as t', 'p.type_id', '=', 't.id')
 						->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
 						->get();
