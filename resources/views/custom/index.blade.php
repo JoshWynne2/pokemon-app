@@ -36,7 +36,7 @@
 						</tr>
 
 					@empty
-						<h4> You have no pokemon! </h4>
+						<h4> You have no pokemon! <a class="text-sky-600 hover:underline" href="{{route('custom.create')}}"> Create One </a></h4>
 					@endforelse
 						</tbody>
 					</table>

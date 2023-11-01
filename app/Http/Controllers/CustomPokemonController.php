@@ -30,12 +30,21 @@ class CustomPokemonController extends Controller
     public function create()
     {
 		$allpokemon = DB::table('pokemon as p')
-						->select('p.name', "t.name as type", "t2.name as secondary_type", "p.image_url")
+						->select('p.id', 'p.name', "t.name as type", "t2.name as secondary_type", "p.image_url")
 						->join('types as t', 'p.type_id', '=', 't.id')
 						->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
+						->orderBy('p.id', 'asc')
 						->get();
 
-        return view('custom.create', ['pokemon' => $allpokemon]);
+		$allmoves = DB::table('moves as m')
+						->select('m.id', 'm.name', "t.name as type", 'm.description')
+						->join('types as t', 'm.type_id', '=', 't.id')
+						->get();
+        return view('custom.create', 
+			[
+				'pokemon' => $allpokemon,
+				'moves' => $allmoves
+			]);
     }
 
     /**
@@ -43,7 +52,11 @@ class CustomPokemonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+			'pokemon' => 'required'
+		];
+
+		dd($request);
     }
 
     /**
