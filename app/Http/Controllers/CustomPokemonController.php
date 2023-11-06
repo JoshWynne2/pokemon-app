@@ -114,7 +114,24 @@ class CustomPokemonController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mon = DB::table('custom_pokemon as c')
+								->select('c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
+								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
+								->join('types as t', 'p.type_id', '=', 't.id')
+								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
+								->where('c.id', '=', $id)
+								->first();
+
+		$moves = DB::table('custom_pokemon_moves as cm')
+					->select('c.id', 'm.name', 't.name as type', 'm.description')
+					->join('custom_pokemon as c', 'c.id', '=', 'cm.custom_id')
+					->join('moves as m', 'm.id', '=', 'cm.move_id')
+					->join('types as t', 't.id', '=', 'm.type_id')
+					->where('c.id', '=', '4')
+					->orderBy('m.id', 'asc')
+					->get();
+
+		return view('custom.show', ["id" => $id, "mon" => $mon, "moves" => $moves]);
     }
 
     /**

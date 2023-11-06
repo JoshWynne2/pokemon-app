@@ -31,7 +31,7 @@
 						<tr class ="bg-slate-800 hover:bg-slate-700">
 					@endif 
 							<td class="px-3 w-3/12"><image src="{{URL($mon->image_url)}}"></td>
-							<td class="px-3 w-2/12"> {{$mon->name}}</td>
+							<td class="px-3 w-2/12"> <a class="text-sky-600 hover:underline" href="{{route('custom.show', $mon->id)}}" > {{$mon->name}} </a> </td>
 							<td class="px-3 w-2/12"> {{$mon->rname}}</td>
 							<td class="px-3 w-2/12"> {{$mon->type}}</td>
 							<td class="px-3 w-2/12"> {{$mon->secondary_type}}</td>
