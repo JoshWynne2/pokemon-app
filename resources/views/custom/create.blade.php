@@ -9,12 +9,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-					<form action="{{route('custom.store')}}" method="POST">
+
+				@if ($errors->has('pokemon'))
+				hii
+				@endif
+				<form action="{{route('custom.store')}}" method="POST">
 						@csrf
 
 						<div>
 							<label>Pokemon<label>
-							<select id="pokemon" class="block appearance-none w-1/2 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+							<select name="pokemon" id="pokemon" class="block appearance-none w-1/2 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 								@forelse($pokemon as $mon)
 								<option value="{{$mon->id}}"> {{$mon->name}} </option>
 								@empty
@@ -23,10 +27,15 @@
 							</select>
 						</div>
 						<br>
-						<h4>Moveset</h4>
+						
+						<label>Nickname</label>
+						<input type='text' name='nickname' id='nickname' class='block appearance-none w-1/2 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'>
+						<br>
+
+						<label>Moveset</label>
 						<div class="grid grid-cols-2 gap-2 w-1/2">
 							<!-- <label>Move 1:</label> -->
-							<select id="move1" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+							<select name='move1' id="move1" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 								<option value="" selected="selected"> Move 1 </option>
 								@forelse($moves as $move)
 								<option value="{{$move->id}}"> {{$move->name}} </option>
@@ -34,7 +43,7 @@
 								<option>missingNo!!!</option>
 								@endforelse
 							</select>
-							<select id="move2" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+							<select name='move2' id="move2" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 								<option value="" selected="selected"> Move 2 </option>
 								@forelse($moves as $move)
 								<option value="{{$move->id}}"> {{$move->name}} </option>
@@ -42,7 +51,7 @@
 								<option>missingNo!!!</option>
 								@endforelse
 							</select>
-							<select id="move3" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+							<select name='move3' id="move3" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 								<option value="" selected="selected"> Move 3 </option>
 								@forelse($moves as $move)
 								<option value="{{$move->id}}"> {{$move->name}} </option>
@@ -50,7 +59,7 @@
 								<option>missingNo!!!</option>
 								@endforelse
 							</select>
-							<select id="move4" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+							<select name='move4' id="move4" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 								<option value="" selected="selected"> Move 4 </option>
 								@forelse($moves as $move)
 								<option value="{{$move->id}}"> {{$move->name}} </option>

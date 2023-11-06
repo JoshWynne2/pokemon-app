@@ -9,6 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
+				@if(count($pokemon) >= 1)
+				<a class="text-sky-600 hover:underline" href="{{route('custom.create')}}"> Create A New Pokemon </a>
+				@endif
 				<table class="w-full">
 						<thead class="bg-slate-600"> 
 							<tr>
@@ -27,12 +30,12 @@
 					@else
 						<tr class ="bg-slate-800 hover:bg-slate-700">
 					@endif 
-							<td class="px-3 w-1/4"> <image src="{{URL($mon->image_url)}}"></td>
-							<td class="px-3 w-1/4"> {{$mon->name}}</td>
-							<td class="px-3 w-1/4"> {{$mon->rname}}</td>
-							<td class="px-3 w-1/4"> {{$mon->type}}</td>
-							<td class="px-3 w-1/4"> {{$mon->secondary_type}}</td>
-							<td class="px-3 w-1/8"> <a class="text-sky-600 hover:underline" href="{{route('custom.edit', $mon->id)}}" >Edit </a> </td>
+							<td class="px-3 w-3/12"><image src="{{URL($mon->image_url)}}"></td>
+							<td class="px-3 w-2/12"> {{$mon->name}}</td>
+							<td class="px-3 w-2/12"> {{$mon->rname}}</td>
+							<td class="px-3 w-2/12"> {{$mon->type}}</td>
+							<td class="px-3 w-2/12"> {{$mon->secondary_type}}</td>
+							<td class="px-3 w-1/12"> <a class="text-sky-600 hover:underline" href="{{route('custom.edit', $mon->id)}}" >Edit </a> </td>
 						</tr>
 
 					@empty

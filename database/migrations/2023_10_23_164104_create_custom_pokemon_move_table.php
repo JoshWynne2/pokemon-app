@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('custom_pokemon_move', function (Blueprint $table) {
+        Schema::create('custom_pokemon_moves', function (Blueprint $table) {
             $table->id();			
-			$table->foreignId('pokemon_id')->references('id')->on('pokemon');
-			$table->foreignId('type_id')->references('id')->on('types');
-        });
+			$table->foreignId('custom_id')->references('id')->on('custom_pokemon');
+			$table->foreignId('move_id')->references('id')->on('moves');
+			$table->timestamps();
+		});
     }
 
     /**
