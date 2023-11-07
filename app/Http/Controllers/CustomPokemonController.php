@@ -16,13 +16,18 @@ class CustomPokemonController extends Controller
      */
     public function index()
     {
+
+		//only show the users own pokemon
 		$user = Auth::id();
 		$usersCustomPokemon = DB::table('custom_pokemon as c')
 								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
+								->join('users as u', 'c.user_id', '=', 'u.id')
 								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
 								->join('types as t', 'p.type_id', '=', 't.id')
 								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
+								->where('u.id', '=', 'c.user_id')
 								->get();
+
         return view('custom.index', ['pokemon'=>$usersCustomPokemon, 'userid' => $user]);
     }
 
@@ -115,7 +120,7 @@ class CustomPokemonController extends Controller
     public function show(string $id)
     {
         $mon = DB::table('custom_pokemon as c')
-								->select('c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
+								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
 								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
 								->join('types as t', 'p.type_id', '=', 't.id')
 								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
@@ -127,8 +132,8 @@ class CustomPokemonController extends Controller
 					->join('custom_pokemon as c', 'c.id', '=', 'cm.custom_id')
 					->join('moves as m', 'm.id', '=', 'cm.move_id')
 					->join('types as t', 't.id', '=', 'm.type_id')
-					->where('c.id', '=', '4')
-					->orderBy('m.id', 'asc')
+					->where('c.id', '=', $id)
+					->orderBy('m.id', 'desc')
 					->get();
 
 		return view('custom.show', ["id" => $id, "mon" => $mon, "moves" => $moves]);
@@ -196,6 +201,7 @@ class CustomPokemonController extends Controller
 			'move4' => 'nullable',
 		];
 
+		// the only way this message could actually appear is if the user does some crazy form injections OR the pokemon database is empty
 		$messages = [
 			'pokemon.required' => 'pick a pokemon!!!'
 		];
@@ -208,6 +214,25 @@ class CustomPokemonController extends Controller
 		$customPokemon->user_id = Auth::id();
 		$customPokemon->save();
 
+		/*
+			to cover every edge case of custom pokemon not always having 4 moves and searching and finding
+
+			editing existing custom moves would look like this:
+
+			see how many moves the pokemon has
+			see how many have been edited
+			see which ones have been edited and change those
+			if a new one was added make it
+			if an old one was deleted delete it
+
+			instead im:
+
+			deleting all old moves assocaited with the custom pokemon
+			creating all new moves associated with the custom pokemon
+
+			because the old data is submitted through the form anyway this works in every situation
+			main issue is that the ID numbers will quickly inflate but theres probably a way to fix that with a trigger or something 
+		*/
 		$cmoves = DB::table('custom_pokemon_moves as cm')
 						->select("*")
 						->where('cm.custom_id', '=', $id)
@@ -240,7 +265,7 @@ class CustomPokemonController extends Controller
 		}
 		
 		return redirect()
-			->route('custom.index')
+			->route('custom.show', $id)
 			->with('status', 'Custom Pokemon Edited');
     }
 
@@ -249,6 +274,21 @@ class CustomPokemonController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+		// delete set moves for the pokemon
+		$cmoves = DB::table('custom_pokemon_moves as cm')
+						->select("*")
+						->where('cm.custom_id', '=', $id)
+						->orderBy('cm.id', 'desc')
+						->delete();
+
+		// delete the pokemon 
+		$mon = CustomPokemon::findOrFail($id);
+		$mon->delete();
+		
+		return redirect()
+			->route("custom.index")
+			->with("status", "Custom Pokemon Deleted");
+
+		// return view("custom.index");
     }
 }

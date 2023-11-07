@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 				@if(count($pokemon) >= 1)
-				<a class="text-sky-600 hover:underline" href="{{route('custom.create')}}"> Create A New Pokemon </a>
+				<button class="mb-4 bg-transparent hover:bg-sky-500 text-sky-700 font-semibold hover:text-white py-2 px-4 border border-sky-700 hover:border-transparent rounded" onclick="window.location='{{ route('custom.create') }}'"> Create A New Pokemon </button>
 				@endif
 				<table class="w-full">
 						<thead class="bg-slate-600"> 
@@ -35,7 +35,7 @@
 							<td class="px-3 w-2/12"> {{$mon->rname}}</td>
 							<td class="px-3 w-2/12"> {{$mon->type}}</td>
 							<td class="px-3 w-2/12"> {{$mon->secondary_type}}</td>
-							<td class="px-3 w-1/12"> <a class="text-sky-600 hover:underline" href="{{route('custom.edit', $mon->id)}}" >Edit </a> </td>
+							<td class="px-3 w-1/12"> <button class="ml-6 bg-transparent hover:bg-sky-500 text-sky-700 font-semibold hover:text-white py-2 px-4 border border-sky-700 hover:border-transparent rounded" onclick="window.location='{{ route('custom.edit', $mon->id) }}'"> Edit </button> </td>
 						</tr>
 
 					@empty

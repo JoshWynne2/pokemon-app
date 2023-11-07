@@ -5,9 +5,9 @@ This site alows users to create and track what pokemon are currently in their te
 ### Todo
 - [x] Import Pokemon data
 - [x] Import Moves data
-- [?] Dashboard
-- [ ] Front page
-- [?] Custom Pokemon Creator
-- [ ] Custom Pokemon Editor
-- [ ] Custom Pokemon Deleter
-- [ ] Team Builder?
+- [x] Custom Pokemon Creator
+- [x] Custom Pokemon Editor
+- [x] Custom Pokemon Deleter
+- [ ] Comment everything!!!!
+- [ ] Index query by type
+- [ ] Video

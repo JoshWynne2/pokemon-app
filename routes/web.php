@@ -31,9 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 	
 	Route::resource('/custom', CustomPokemonController::class);
+	
+	Route::resource('/pokemon', PokemonController::class);
+	Route::resource('/moves', MoveController::class);
 });
-
-Route::resource('/pokemon', PokemonController::class);
-Route::resource('/moves', MoveController::class);
 
 require __DIR__.'/auth.php';
