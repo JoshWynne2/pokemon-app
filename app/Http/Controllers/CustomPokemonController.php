@@ -47,6 +47,7 @@ class CustomPokemonController extends Controller
 						->select('m.id', 'm.name', "t.name as type", 'm.description')
 						->join('types as t', 'm.type_id', '=', 't.id')
 						->get();
+						
         return view('custom.create', 
 			[
 				'pokemon' => $allpokemon,
