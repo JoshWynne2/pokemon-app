@@ -21,11 +21,11 @@ class CustomPokemonController extends Controller
 		$user = Auth::id();
 		$usersCustomPokemon = DB::table('custom_pokemon as c')
 								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
-								->join('users as u', 'c.user_id', '=', 'u.id')
 								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
 								->join('types as t', 'p.type_id', '=', 't.id')
 								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
-								->where('u.id', '=', 'c.user_id')
+								->join('users as u', 'c.user_id', '=', 'u.id')
+								->where('u.id', '=', $user)
 								->get();
 
         return view('custom.index', ['pokemon'=>$usersCustomPokemon, 'userid' => $user]);

@@ -27,7 +27,7 @@ class pokemon_seeder extends Seeder
 
                 Pokemon::create([
                     "name" => $data['2'],
-                    "image_url" => '/images/'. $data['1'].'.png', // make this work!!
+    				"image_url" => '/images/'. $data['1'].'.png', // make this work!!
 					"hp" => $data['9'],
 					"attack" => $data['10'],
 					"defense" => $data['11'],
