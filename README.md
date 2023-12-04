@@ -15,4 +15,4 @@ Hi Mo! I highly recommend watching my video on 1.5x speed I talk very slowly for
 heres the video link too: https://iadt-my.sharepoint.com/:v:/g/personal/n00221586_iadt_ie/ETNxTZqB1XdDhkHBh-bdO1YBFnRDS6JC4a5-N62BXTOBPg?e=IZtKNQ&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19 
 
 
-
+ok its awesome that '':v:'' is an emoji 

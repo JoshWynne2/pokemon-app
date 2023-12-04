@@ -4,6 +4,8 @@ use App\Http\Controllers\CustomPokemonController;
 use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,5 +37,7 @@ Route::middleware('auth')->group(function () {
 	Route::resource('/pokemon', PokemonController::class);
 	Route::resource('/moves', MoveController::class);
 });
+
+Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
 require __DIR__.'/auth.php';
