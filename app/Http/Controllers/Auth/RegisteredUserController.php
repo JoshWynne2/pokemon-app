@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\Role;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -42,6 +44,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+		// attaching the user role to newly created users
+		$role_user = Role::where('name', 'user')->first();
+        $user->roles()->attach($role_user);
+
+
+		
         event(new Registered($user));
 
         Auth::login($user);
