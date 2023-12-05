@@ -62,4 +62,8 @@ class User extends Authenticatable
         }
         return $this->hasRole($roles) || abort(403, "You are not authorized");
     }
+
+	public function pokemon(){
+		return $this->hasMany(CustomPokemon::class);
+	}
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\CustomPokemonMove;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class CustomPokemonController extends Controller
     public function index()
     {
 
-		//show ALL the pokemon
+		//only show the users own pokemon
 		$user = Auth::id();
 		$usersCustomPokemon = DB::table('custom_pokemon as c')
 								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')

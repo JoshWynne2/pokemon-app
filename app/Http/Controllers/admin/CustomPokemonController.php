@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\CustomPokemonMove;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\CustomPokemon;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+
+use Auth;
 
 class CustomPokemonController extends Controller
 {
@@ -16,19 +20,24 @@ class CustomPokemonController extends Controller
      */
     public function index()
     {
+		Auth::user()->authorizeRoles('admin');
 
-		//only show the users own pokemon
-		$user = Auth::id();
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('user.custom.index');
+		}
+
+		//show ALL the pokemon
 		$usersCustomPokemon = DB::table('custom_pokemon as c')
-								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
+								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url', 'c.user_id')
 								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
 								->join('types as t', 'p.type_id', '=', 't.id')
 								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
 								->join('users as u', 'c.user_id', '=', 'u.id')
-								->where('u.id', '=', $user)
 								->get();
 
-        return view('custom.index', ['pokemon'=>$usersCustomPokemon, 'userid' => $user]);
+		$users = User::all();
+
+        return view('custom.admin.index', ['pokemon'=>$usersCustomPokemon, 'userid' => Auth::id(), 'users' => $users]);
     }
 
     /**

@@ -37,5 +37,8 @@ class UserSeeder extends Seeder
         $user->save();
 
         $user->roles()->attach($role_user);
+
+        User::factory()->times(5)->hasPokemon(20)->create();
+
     }
 }

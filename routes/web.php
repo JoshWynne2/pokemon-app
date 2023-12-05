@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CustomPokemonController;
+use App\Http\Controllers\Admin\CustomPokemonController as AdminCustomPokemonController;
+use App\Http\Controllers\User\CustomPokemonController as UserCustomPokemonController;
 use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
 use App\Http\Controllers\ProfileController;
@@ -42,7 +43,7 @@ The users can only see their own - per user is already made
 
 
 */
-Route::resource('/custom', CustomPokemonController::class);
+Route::resource('/custom', AdminCustomPokemonController::class);
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');

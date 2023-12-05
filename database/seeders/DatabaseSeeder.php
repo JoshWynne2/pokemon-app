@@ -24,9 +24,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 		$this->call(RoleSeeder::class);
 		
-		$this->call(UserSeeder::class);
 		$this->call(type_seeder::class);
 		$this->call(pokemon_seeder::class);
 		$this->call(move_seeder::class);
+
+		// user seeder is at the end because it creates custom pokemon which needs everything else done
+		$this->call(UserSeeder::class);
     }
 }
