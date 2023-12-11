@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Showing Custom Pokemon') }}
+            {{ __('Create Custom Pokemon') }}
         </h2>
     </x-slot>
 
@@ -10,23 +10,24 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 					<div class="grid grid-cols-8 gap-10">
-						<div class="col-span-2">
-							<image src="{{URL($mon->image_url)}}">
-						</div>
+					
 						<div class="col-span-6">
-							<h1 class="text-2xl"> {{$mon->name}} </h1>
-							<h4 class="text-sm"> {{$mon->rname}} </h4>
+							<h1 class="text-2xl"> {{$team->name}} </h1>
+							<h4 class="text-sm"> {{$team->description}} </h4>
 							<div class="grid grid-cols-2 gap-2">
-								@forelse($moves as $move)
+
+								@forelse($teamPokemon as $teamMon)
+								@if($teamMon->team_id == $team->id)
 								<div class="max-w-sm rounded overflow-hidden shadow-lg px-6 py-4">
-									{{$move->name}}
+									{{$customPokemon[$teamMon->custom_pokemon_id]->nickname}} - ({{$pokemon[$customPokemon[$teamMon->custom_pokemon_id]->pokemon_id]->name}})
 								</div>
+								@endif
 								@empty
 								<span> No Moves set </span>
 								@endif
 							</div>
 							<div class="p-2 pt-5 space-x-2">
-								<button onclick="window.location='{{ route('custom.edit', $mon->id) }}'" type="btn" name="edit" id="edit" class="bg-transparent hover:bg-sky-500 text-sky-700 font-semibold hover:text-white py-2 px-4 border border-sky-700 hover:border-transparent rounded"> Edit </button>
+								<button onclick="window.location='{{ route('teams.edit', $team->id) }}'" type="btn" name="edit" id="edit" class="bg-transparent hover:bg-sky-500 text-sky-700 font-semibold hover:text-white py-2 px-4 border border-sky-700 hover:border-transparent rounded"> Edit </button>
 							<!--this dialoge popop thing was taken from here:https://www.material-tailwind.com/docs/html/dialog and I edited it to be in the same style as the rest of the site and adding the links
 							in bootstrap I know you can kinda just say this is the dialogue box and then it just works tailwind kinda just sucks :/ -->
 						<button
@@ -49,7 +50,7 @@
 									Delete Custom Pokemon
 								</div>
 								<div class="relative p-4 font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased">
-									Are you sure you want to delete "{{$mon->name}}"? this a action is permanent.
+									Are you sure you want to delete "{{$team->name}}"? this a action is permanent.
 								</div>
 								<div class="flex shrink-0 flex-wrap items-center justify-end pt-2 px-4 text-blue-gray-500">
 								<button
@@ -60,7 +61,7 @@
 									Cancel
 								</button>
 
-								<form method="POST" action="{{ route('custom.destroy',$mon->id) }}">
+								<form method="POST" action="{{ route('teams.destroy',$team->id) }}">
 									@csrf
 									@method('DELETE')
 									<button
@@ -82,6 +83,7 @@
 						<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
 						</div>
 						</div>
+
 					</div>
                 </div>
             </div>

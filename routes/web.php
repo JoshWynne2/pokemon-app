@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CustomPokemonController as AdminCustomPokemonController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\User\CustomPokemonController as UserCustomPokemonController;
 use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
 		
 	Route::resource('/pokemon', PokemonController::class);
 	Route::resource('/moves', MoveController::class);
+
+	Route::resource('/teams', TeamController::class);
+
 });
 
 /*

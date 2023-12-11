@@ -31,6 +31,11 @@
                         {{ __('Your Pokemon') }}
                     </x-nav-link>
                 </div>
+				<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('teams.index')" :active="request()->routeIs('custom.index')">
+                        {{ __('Your Teams') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
