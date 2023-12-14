@@ -16,8 +16,8 @@ CA1 VIDEO :::: https://iadt-my.sharepoint.com/:v:/g/personal/n00221586_iadt_ie/E
 
 ### Todo CA2
 - [x] User role
-- [ ] Admin sees all custom pokemon
-- [ ] Team CRUD??????
+- [x] Admin sees all custom pokemon
+- [x] Team CRUD??????
 
 Team info:
 	like how a moveset is made but with 6 slots for pokemon
