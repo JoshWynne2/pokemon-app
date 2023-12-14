@@ -14,42 +14,9 @@
 
 					<button class="mb-4 bg-transparent hover:bg-sky-500 text-sky-700 font-semibold hover:text-white py-2 px-4 border border-sky-700 hover:border-transparent rounded" onclick="window.location='{{ route('teams.create') }}'"> Create A New Team </button>
 				
+				
 					
-					<div class="card">
-						<!-- component -->
-						<div class="pb-2 max-w-xl">
-							<div class="shadow-2xl bg-white dark:bg-slate-700 rounded-lg tracking-wide" >
-								<div class="p-4 mt-2 bg-blue">
-									<h2 class="font-bold text-2xl text-white-900 tracking-normal">Team Name</h2>
-										<p class="text-sm text-white-800 px-2 mr-1">
-											Team description
-										</p>
-										<div class="author flex items-center -ml-3 my-3">
-										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4  shadow" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80" alt="avatar">
-										</div>
-										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4  shadow" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80" alt="avatar">
-										</div>
-										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4  shadow" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80" alt="avatar">
-										</div>
-										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4  shadow" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80" alt="avatar">
-										</div>
-										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4  shadow" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80" alt="avatar">
-										</div>
-										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4  shadow" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80" alt="avatar">
-										</div>
-										<button class='block appearance-none w-1/10 pl-8 bg-slate-800 border border-slate-800 hover:border-slate-700 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'>View </button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- card end -->
-						@foreach($teams as $team)
+					@foreach($teams as $team)
 						<div class="pb-2 max-w-xl">
 							<div class="shadow-2xl bg-white dark:bg-slate-700 rounded-lg tracking-wide" >
 								<div class="p-4 mt-2 bg-blue">

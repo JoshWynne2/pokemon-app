@@ -118,7 +118,7 @@ class TeamController extends Controller
 
 		return redirect()
 			->route('teams.index')
-			->with('status', 'Custom Pokemon Created');
+			->with('status', 'Team Created');
 
     }
 
@@ -141,7 +141,12 @@ class TeamController extends Controller
     public function edit(string $id)
     {
 		$team = Team::findOrFail($id);
-		$teamPokemon = CustomPokemonTeam::all();
+		
+		$teamPokemon = DB::table('custom_pokemon_teams')
+						->select('*')
+						->where('team_id', '=', $id)
+						->get();
+
 		$pokemon = Pokemon::all();
 		$customPokemon = CustomPokemon::all();
 
@@ -153,7 +158,79 @@ class TeamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+		$rules = [
+			'name' => 'string|required',
+			'description' => 'string|nullable',
+
+			'pokemon1' => 'nullable',
+			'pokemon2' => 'nullable',
+			'pokemon3' => 'nullable',
+			'pokemon4' => 'nullable',
+			'pokemon5' => 'nullable',
+			'pokemon6' => 'nullable',
+		];
+
+		$messages = [
+			'name.required' => 'type a name!'
+		];
+		// dd($request);
+		
+		$request->validate($rules, $messages);
+		
+		$team = Team::findOrFail($id);  //because the edit has everything pre filled in I just overwrite with the new data anyway
+		$team->name = ($request->name) ? $request->name : "None";
+		$team->description = ($request->description) ? $request->description : "None";
+		$team->user_id = Auth::id();
+
+		$team->save();
+
+		// like in the custom pokemon controller, instead of finding an undeterminind amount of pokemon i just delete what we have in the pivot tables and then re asign them
+		$tpokmeon = DB::table('custom_pokemon_teams as tm')
+					->select("*")
+					->where('tm.team_id', '=', $id)
+					->delete();
+
+		if($request->pokemon1){
+			$teamPokemon = new CustomPokemonTeam;
+			$teamPokemon->team_id = $team->id;
+			$teamPokemon->custom_pokemon_id = $request->pokemon1;
+			$teamPokemon->save();
+		}
+		if($request->pokemon2){
+			$teamPokemon = new CustomPokemonTeam;
+			$teamPokemon->team_id = $team->id;
+			$teamPokemon->custom_pokemon_id = $request->pokemon2;
+			$teamPokemon->save();
+		}
+		if($request->pokemon3){
+			$teamPokemon = new CustomPokemonTeam;
+			$teamPokemon->team_id = $team->id;
+			$teamPokemon->custom_pokemon_id = $request->pokemon3;
+			$teamPokemon->save();
+		}
+		if($request->pokemon4){
+			$teamPokemon = new CustomPokemonTeam;
+			$teamPokemon->team_id = $team->id;
+			$teamPokemon->custom_pokemon_id = $request->pokemon4;
+			$teamPokemon->save();
+		}
+		if($request->pokemon5){
+			$teamPokemon = new CustomPokemonTeam;
+			$teamPokemon->team_id = $team->id;
+			$teamPokemon->custom_pokemon_id = $request->pokemon5;
+			$teamPokemon->save();
+		}
+		if($request->pokemon6){
+			$teamPokemon = new CustomPokemonTeam;
+			$teamPokemon->team_id = $team->id;
+			$teamPokemon->custom_pokemon_id = $request->pokemon6;
+			$teamPokemon->save();
+		}
+
+		return redirect()
+			->route('teams.show', $id)
+			->with('status', 'Team Edited');
+
     }
 
     /**
@@ -161,6 +238,19 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
+		// delete set pokemon for the team
+		$tpokmeon = DB::table('custom_pokemon_teams as tm')
+					->select("*")
+					->where('tm.team_id', '=', $id)
+					->delete();
+
+		// delete the team 
+		$team = Team::findOrFail($id);
+		$team->delete();
+
+		return redirect()
+		->route("teams.index")
+		->with("status", "Team Deleted");
     }
 }

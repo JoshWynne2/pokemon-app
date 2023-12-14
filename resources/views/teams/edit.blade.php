@@ -14,7 +14,8 @@
 					@endif
 					<form action="{{route('teams.update', $team->id)}}" method="POST">
 						@csrf
-
+						@method('PUT')
+						
 						<label>Team Name</label>
 						<input value="{{$team->name}}" type='text' name='name' id='name' class='block appearance-none w-1/2 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'>
 						<br>
@@ -24,60 +25,40 @@
 						<div>
 							<label>Pokemon<label>
 							<div class="grid grid-cols-3 gap-2">
-								<select name="pokemon1" id="pokemon1" class="block appearance-none bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-									<option value="" selected="selected"> Pokemon 1 </option>
-									@forelse($customPokemon as $mon)
+							
+							<!-- {{$moncount = count($teamPokemon)}} -->
+							@for ($i = 1; $i <= 6; $i++)
 
-									<option value="{{$mon->id}}"> {{$mon->nickname}} - ({{$mon->rname}}) </option>
-									@empty
-									<option>missingNo!!!</option>
-									@endforelse
-								</select>
-								<select name="pokemon2" id="pokemon2" class="block appearance-none bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-									<option value="" selected="selected"> Pokemon 2 </option>
-									@forelse($customPokemon as $mon)
-									<option value="{{$mon->id}}"> {{$mon->nickname}} - ({{$mon->rname}}) </option>
-									@empty
-									<option>missingNo!!!</option>
-									@endforelse
-								</select>
-								<select name="pokemon3" id="pokemon3" class="block appearance-none bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-									<option value="" selected="selected"> Pokemon 3 </option>
-									@forelse($customPokemon as $mon)
-									<option value="{{$mon->id}}"> {{$mon->nickname}} - ({{$mon->rname}}) </option>
-									@empty
-									<option>missingNo!!!</option>
-									@endforelse
-								</select>
-								<select name="pokemon4" id="pokemon4" class="block appearance-none bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-									<option value="" selected="selected"> Pokemon 4 </option>
-									@forelse($customPokemon as $mon)
-									<option value="{{$mon->id}}"> {{$mon->nickname}} - ({{$pokemon[$customPokemon->pokemon_id]->name}}) </option>
-									@empty
-									<option>missingNo!!!</option>
-									@endforelse
-								</select>
-								<select name="pokemon5" id="pokemon5" class="block appearance-none bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-									<option value="" selected="selected"> Pokemon 5 </option>
-									@forelse($customPokemon as $mon)
-									<option value="{{$mon->id}}"> {{$mon->nickname}} - ({{$mon->rname}}) </option>
-									@empty
-									<option>missingNo!!!</option>
-									@endforelse
-								</select>
-								<select name="pokemon6" id="pokemon6" class="block appearance-none bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-									<option value="" selected="selected"> Pokemon 6 </option>
-									@forelse($customPokemon as $mon)
-									<option value="{{$mon->id}}"> {{$mon->nickname}} - ({{$mon->rname}}) </option>
-									@empty
-									<option>missingNo!!!</option>
-									@endforelse
-								</select>
-							</div>
+
+							<select name="pokemon{{$i}}" id="pokemon{{$i}}" class="block appearance-none w-30 bg-slate-700 border border-slate-700 hover:border-slate-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+							<option value=""> Pokemon {{$i}} </option>
+
+								@forelse($customPokemon as $mon)
+									<!-- I honestly have no idea why I have to put a -1 on the id here but it works now because of it -->
+								@if($moncount != 0)
+									@if($mon->id == $teamPokemon[$moncount-1]->custom_pokemon_id)
+									<option selected value="{{$mon->id -1}}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id]->name}})  </option>
+									@else
+									<option value="{{$mon->id -1}}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id]->name}}) </option>
+									@endif
+								@else 
+								<option value="{{$mon->id -1}}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id]->name}}) </option>
+								@endif
+
+								@empty
+								<option>missingNo!!!</option>
+								@endforelse
+							</select>
+
+							@if($moncount > 0)
+							<!-- {{$moncount--}} -->
+							@endif
+
+						@endfor
+							
+							
+						
 						</div>
-						<br>
-						
-						
 						<br>
 						<button type="submit" name="submit" id="submit" class="bg-transparent hover:bg-sky-500 text-sky-700 font-semibold hover:text-white py-2 px-4 border border-sky-700 hover:border-transparent rounded"> Submit </button>
 					</form>
