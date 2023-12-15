@@ -19,7 +19,7 @@
 								@forelse($teamPokemon as $teamMon)
 								@if($teamMon->team_id == $team->id)
 								<div class="max-w-sm rounded overflow-hidden shadow-lg px-6 py-4">
-									{{$customPokemon[$teamMon->custom_pokemon_id]->nickname}} - ({{$pokemon[$customPokemon[$teamMon->custom_pokemon_id]->pokemon_id]->name}})
+									{{$customPokemon[$teamMon->custom_pokemon_id-1]->nickname}} - ({{$pokemon[$customPokemon[$teamMon->custom_pokemon_id-1]->pokemon_id-1]->name}})
 								</div>
 								@endif
 								@empty

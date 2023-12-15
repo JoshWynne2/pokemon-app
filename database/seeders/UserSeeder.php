@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         $admin->roles()->attach($role_admin);
 
         $user = new User;
-        $user->name = "Geoff Keighly";
+        $user->name = "Geoff Keighly";	
         $user->email = "hello@thegameawards.com";
         $user->password = "frogger2";
         $user->save();

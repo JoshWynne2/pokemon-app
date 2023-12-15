@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\CustomPokemon;
 use App\Models\CustomPokemonTeam;
 use App\Models\Pokemon;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;	
 use App\Models\Team;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +41,7 @@ class TeamController extends Controller
 								->join('types as t', 'p.type_id', '=', 't.id')
 								->join('types as t2', 'p.type_secondary_id', '=', 't2.id')
 								->join('users as u', 'c.user_id', '=', 'u.id')
-								// ->where('u.id', '=', $user)
+								->where('u.id', '=', $user)
 								->get();
 
 								

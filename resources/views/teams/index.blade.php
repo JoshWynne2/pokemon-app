@@ -27,11 +27,13 @@
 									<div class="author flex items-center -ml-3 my-3">
 										@foreach($teamPokemon as $teamMon)
 										@if($teamMon->team_id == $team->id)
+
 										<!-- {{
-											$thisMonId = $customPokemon[$teamMon->custom_pokemon_id]->pokemon_id
+											$thisMonId = $customPokemon[$teamMon->custom_pokemon_id-1]->pokemon_id 
 										}} -->
+
 										<div class="user-logo">
-											<img class="w-12 h-12 object-cover rounded-full mx-4 shadow" src="{{URL($pokemon[$thisMonId]->image_url)}}">
+											<img class="w-12 h-12 object-cover rounded-full mx-4 shadow" src="{{URL($pokemon[$thisMonId-1]->image_url)}}">
 										</div>
 										@endif
 										@endforeach
