@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 	
 });
 
-Route::get('/admin/teams/index', [AdminTeamController::class, 'index'])->middleware(['auth'])->name('admin.teams.index');
+Route::resource('/admin/teams', AdminTeamController::class)->middleware(['auth'])->names('admin.teams');
 /*
 The admins can see every custom pokemon
 The users can only see their own - per user is already made

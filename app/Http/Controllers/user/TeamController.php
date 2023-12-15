@@ -146,6 +146,11 @@ class TeamController extends Controller
      */
     public function edit(string $id)
     {
+		if(Auth::user()->hasRole('admin')){
+			return to_route('admin.teams.edit', $id);
+		}
+
+
 		$team = Team::findOrFail($id);
 		
 		$teamPokemon = DB::table('custom_pokemon_teams')
@@ -154,7 +159,7 @@ class TeamController extends Controller
 						->get();
 
 		$pokemon = Pokemon::all();
-		$customPokemon = CustomPokemon::all();
+		$customPokemon = CustomPokemon::select('*')->where('user_id', '=', Auth::id())->get();
 
         return view('teams.edit', ['team' => $team, 'teamPokemon' => $teamPokemon, 'pokemon' => $pokemon, 'customPokemon' => $customPokemon]);
     }

@@ -37,12 +37,12 @@
 									<!-- I honestly have no idea why I have to put a -1 on the id here but it works now because of it -->
 								@if($moncount != 0)
 									@if($mon->id == $teamPokemon[$moncount-1]->custom_pokemon_id)
-									<option selected value="{{$mon->id -1}}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id]->name}})  </option>
+									<option selected value="{{$mon->id }}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id-1]->name}})  </option>
 									@else
-									<option value="{{$mon->id -1}}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id]->name}}) </option>
+									<option value="{{$mon->id }}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id-1]->name}}) </option>
 									@endif
 								@else 
-								<option value="{{$mon->id -1}}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id]->name}}) </option>
+								<option value="{{$mon->id }}"> {{$mon->nickname}} - ({{$pokemon[$mon->pokemon_id-1]->name}}) </option>
 								@endif
 
 								@empty
