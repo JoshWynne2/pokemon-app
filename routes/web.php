@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Admin\CustomPokemonController as AdminCustomPokemonController;
 use App\Http\Controllers\User\CustomPokemonController as UserCustomPokemonController;
-use App\Http\Controllers\User\TeamController;
+use App\Http\Controllers\User\TeamController as UserTeamController;
+use App\Http\Controllers\Admin\TeamController as AdminTeamController;
 use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
 use App\Http\Controllers\ProfileController;
@@ -37,17 +38,18 @@ Route::middleware('auth')->group(function () {
 	Route::resource('/pokemon', PokemonController::class);
 	Route::resource('/moves', MoveController::class);
 
-	Route::resource('/teams', TeamController::class);
-
+	Route::resource('/teams', UserTeamController::class);
+	
 });
 
+Route::get('/admin/teams/index', [AdminTeamController::class, 'index'])->middleware(['auth'])->name('admin.teams.index');
 /*
 The admins can see every custom pokemon
 The users can only see their own - per user is already made
 
 
 */
-Route::resource('/admin/custom', AdminCustomPokemonController::class);
+Route::resource('/admin/custom', AdminCustomPokemonController::class)->middleware(['auth'])->names('admin.custom');
 
 Route::resource('/custom', UserCustomPokemonController::class);
 

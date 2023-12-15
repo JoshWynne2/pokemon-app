@@ -18,6 +18,9 @@ class CustomPokemonController extends Controller
      */
     public function index()
     {
+		if(Auth::user()->hasRole('admin')){
+			return to_route('admin.custom.index');
+		}
 
 		//only show the users own pokemon
 		$user = Auth::id();

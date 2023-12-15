@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\Team;
 use Auth;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Role;
 
 class TeamController extends Controller
 {
@@ -20,7 +20,11 @@ class TeamController extends Controller
      */
     public function index()
     {
-		$teams = Team::all();
+		if(Auth::user()->hasRole('admin')){
+			return to_route('admin.teams.index');
+		}
+
+		$teams = Team::select('*')->where('user_id', '=', Auth::id())->get();
 		$teamPokemon = CustomPokemonTeam::all();
 		$pokemon = Pokemon::all();
 		$customPokemon = CustomPokemon::all();
