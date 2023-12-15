@@ -45,6 +45,10 @@ class CustomPokemonController extends Controller
      */
     public function create()
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('user.custom.index');
+		}
+
 		$allpokemon = DB::table('pokemon as p')
 						->select('p.id', 'p.name', "t.name as type", "t2.name as secondary_type", "p.image_url")
 						->join('types as t', 'p.type_id', '=', 't.id')
@@ -129,6 +133,10 @@ class CustomPokemonController extends Controller
      */
     public function show(string $id)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('user.custom.index');
+		}
+
         $mon = DB::table('custom_pokemon as c')
 								->select('c.id', 'c.nickname as name', 'p.name as rname', 't.name as type', 't2.name as secondary_type', 'p.image_url')
 								->join('pokemon as p', 'c.pokemon_id', '=', 'p.id')
@@ -154,6 +162,10 @@ class CustomPokemonController extends Controller
      */
     public function edit(string $id)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('user.custom.index');
+		}
+
 		$allpokemon = DB::table('pokemon as p')
 						->select('p.id', 'p.name', "t.name as type", "t2.name as secondary_type", "p.image_url")
 						->join('types as t', 'p.type_id', '=', 't.id')
@@ -284,6 +296,10 @@ class CustomPokemonController extends Controller
      */
     public function destroy(string $id)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('user.custom.index');
+		}
+		
 		// delete set moves for the pokemon
 		$cmoves = DB::table('custom_pokemon_moves as cm')
 						->select("*")

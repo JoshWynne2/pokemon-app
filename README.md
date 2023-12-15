@@ -36,7 +36,7 @@ custom-pokemon
 teams
 users?
 
-CA2 VIDEO::: NOT REAL YET :(
+CA2 VIDEO::: https://iadt-my.sharepoint.com/:v:/g/personal/n00221586_iadt_ie/ESsvi6xMEMJKnfU8ZHPCrZsBcNvWp8UIsHKVIpB3hVqfXQ?e=UPrkGn&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D
 
 
 

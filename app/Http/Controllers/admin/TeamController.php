@@ -19,6 +19,10 @@ class TeamController extends Controller
      */
     public function index()
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('teams.index');
+		}
+
 		$teams = Team::all();
 		$teamPokemon = CustomPokemonTeam::all();
 		$pokemon = Pokemon::all();
@@ -32,6 +36,9 @@ class TeamController extends Controller
      */
     public function create()
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('teams.index');
+		}
 		//only show the users own teams (commented out rn)
 		$user = Auth::id();
 		$usersCustomPokemon = DB::table('custom_pokemon as c')
@@ -53,6 +60,9 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('teams.index');
+		}
 		$rules = [
 			'name' => 'string|required',
 			'description' => 'string|nullable',
@@ -128,6 +138,9 @@ class TeamController extends Controller
      */
     public function show(string $id)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('teams.index');
+		}
 		$team = Team::findOrFail($id);
 		$teamPokemon = CustomPokemonTeam::all();
 		$pokemon = Pokemon::all();
@@ -159,6 +172,9 @@ class TeamController extends Controller
      */
     public function update(Request $request, string $id)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('teams.index');
+		}
 		$rules = [
 			'name' => 'string|required',
 			'description' => 'string|nullable',
@@ -239,6 +255,9 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
+		if(!Auth::user()->hasRole('admin')){
+			return to_route('teams.index');
+		}
         
 		// delete set pokemon for the team
 		$tpokmeon = DB::table('custom_pokemon_teams as tm')
